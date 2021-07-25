@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'peace_sansregular';
+    src: url('peace_sans-webfont.eot');
+    src: url('peace_sans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('peace_sans-webfont.woff') format('woff'),
+         url('peace_sans-webfont.ttf') format('truetype'),
+         url('peace_sans-webfont.svg#peace_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+

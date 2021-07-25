@@ -1,0 +1,137 @@
+.navigation-bar-fixed-top.scrolled {
+    background-color: var(--mintcream) !important;
+    transition: background-color 200ms linear;
+    border-bottom: 0px solid #fff !important
+}
+
+.hanburger-icon {
+    width: 28px;
+    height: 28px;
+	-webkit-transition: 0.8s;
+	-o-transition: 0.8s;
+	transition: 0.8s;
+}
+
+.hanburger-icon .icon-lines {
+    width: 28px;
+    height: 2px;
+    border-radius: 2px;
+	-webkit-transition: 0.4s;
+	-o-transition: 0.4s;
+	transition: 0.4s;
+    background-color: var(--blueviolet);
+}
+
+.hanburger-icon.slide .icon-lines {
+	background: transparent;
+}
+
+.hanburger-icon.slide .icon-lines::before {
+	-webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+}
+
+.hanburger-icon.slide .icon-lines::after {
+	-webkit-transform: rotate(-45deg);
+	    -ms-transform: rotate(-45deg);
+	        transform: rotate(-45deg);
+}
+
+.icon-lines::before,
+.icon-lines::after {
+	content: '';
+	position: absolute;
+	width: 28px;
+    height: 2px;
+    background-color: var(--blueviolet);
+    border-radius: 2px;
+	-webkit-transition: 0.4s;
+	-o-transition: 0.4s;
+	transition: 0.4s;
+	left: 0;
+	right: 0;
+}
+
+.icon-lines::before {
+	-webkit-transform: translateY(-7px);
+	    -ms-transform: translateY(-7px);
+	        transform: translateY(-7px);
+}
+
+.icon-lines::after {
+	-webkit-transform: translateY(7px);
+	    -ms-transform: translateY(7px);
+	        transform: translateY(7px);
+}
+
+.navbar-menu {
+	width: 20vw;
+	z-index: 5;
+	top: 0;
+	bottom: 0;
+	-webkit-transition: 0.6s;
+	-o-transition: 0.6s;
+	transition: 0.6s;
+	right: -100%;
+}
+
+.navbar-menu .menu-content {
+	z-index: 6;
+	overflow-y: scroll;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    padding-top: 100px;
+}
+
+.navbar-toggle {
+	right: 0;
+	-webkit-transition: 0.6s;
+	-o-transition: 0.6s;
+	transition: 0.6s;
+}
+
+.navbar-menu .menu-content::-webkit-scrollbar { 
+    display: none !important;  /* Safari and Chrome */
+}
+
+/*Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+	.navbar-menu {
+		width: 30vw;
+	}
+}
+
+/*Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) and (min-width: 768.98px) {
+	.navbar-menu {
+		width: 32vw;
+	}
+}
+
+/*Small devices (landscape phones, less than 768px)*/
+@media (max-width: 768px) {
+	.navbar-links-list {
+		display: none !important;
+	}
+
+	.logo-wrapper {
+		width: 194px;
+	}
+
+	.navbar-menu {
+		width: 40vw;
+	}
+
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+	.navbar-menu {
+		width: 100vw;
+	}
+
+	.blog-article-image-height {
+		height: 208px;
+	}
+}
