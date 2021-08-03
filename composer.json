@@ -1,19 +1,12 @@
 {
-    "name": "bullnet/framework",
-    "description": "An MVC Framework in PHP Built On Top Of Slim Framework.",
-    "type": "framework",
-    "authors": [{
-            "name": "markomeje",
-            "email": "markomejeonline@gmail.com"
-        }
-    ],
 
     "require-dev": {
-        "phpdocumentor/phpdocumentor": "2.*",
+        "phpdocumentor/phpdocumentor": "3.*",
         "phpunit/phpunit": "7"
     },
 
     "replace": {  
+        "sebastian/resource-operations": "*", 
         "container-interop/container-interop": "*",  
         "zendframework/zend-cache": "*",  
         "zendframework/zend-config": "*",  
@@ -24,6 +17,7 @@
         "zendframework/zend-serializer": "*",  
         "zendframework/zend-servicemanager": "*",  
         "zendframework/zend-stdlib": "*",
+        "zendframework/zend-code": "*",
         "zendframework/zend-i18n": "*",
         "padraic/phar-updater": "*",
         "phpunit/php-token-stream": "*",
@@ -40,15 +34,19 @@
         "php-di/slim-bridge": "^3.1",
         "respect/validation": "^2.2",
         "ramsey/uuid": "^4.1",
-        "fakerphp/faker": "^1.14"
+        "fakerphp/faker": "^1.14",
+        "robmorgan/phinx": "^0.12.7",
+        "doctrine/migrations": "^2.0",
+        "swiftmailer/swiftmailer": "^6.0",
+        "symfony/flex": "*"
     },
 
     "autoload": {
         "psr-4": {
-            "Bullnet\\": "application/"
+            "Bullnet\\": "bullnet/"
         },
         "files": [
-            "./application/helpers.php"
+            "./bullnet/helpers.php"
         ]
     }
 }

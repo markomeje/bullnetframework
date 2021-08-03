@@ -1,54 +1,69 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * phpDocumentor
+ * This file is part of phpDocumentor.
  *
- * PHP Version 5.3
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
- * @copyright 2010-2014 Mike van Riel / Naenius (http://www.naenius.com)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @link      http://phpdoc.org
+ * @link https://phpdoc.org
  */
 
 namespace phpDocumentor\Descriptor\Filter;
 
+use InvalidArgumentException;
+use phpDocumentor\Configuration\ApiSpecification;
 use phpDocumentor\Descriptor\DescriptorAbstract;
 use phpDocumentor\Descriptor\Interfaces\VisibilityInterface;
-use phpDocumentor\Descriptor\ProjectDescriptorBuilder;
-use Zend\Filter\AbstractFilter;
 
 /**
  * Strips any Descriptor if their visibility is allowed according to the ProjectDescriptorBuilder.
  */
-class StripOnVisibility extends AbstractFilter
+class StripOnVisibility implements FilterInterface
 {
-    /** @var ProjectDescriptorBuilder $builder */
-    protected $builder;
-
-    /**
-     * Initializes this filter with an instance of the builder to retrieve the latest ProjectDescriptor from.
-     *
-     * @param ProjectDescriptorBuilder $builder
-     */
-    public function __construct(ProjectDescriptorBuilder $builder)
-    {
-        $this->builder = $builder;
-    }
-
     /**
      * Filter Descriptor with based on visibility.
-     *
-     * @param DescriptorAbstract $value
-     *
-     * @return DescriptorAbstract|null
      */
-    public function filter($value)
+    public function __invoke(FilterPayload $payload) : FilterPayload
     {
-        if ($value instanceof VisibilityInterface
-            && !$this->builder->isVisibilityAllowed($value->getVisibility())
-        ) {
-            return null;
+        if (!$payload->getFilterable() instanceof DescriptorAbstract) {
+            return $payload;
         }
 
-        return $value;
+        $filterable = $payload->getFilterable();
+
+        // if a Descriptor is marked as 'api' and this is set as a visibility; _always_ show it; even if the visibility
+        // is not set
+        if (isset($filterable->getTags()['api'])
+            && $payload->getApiSpecification()->isVisibilityAllowed(ApiSpecification::VISIBILITY_API)
+        ) {
+            return $payload;
+        }
+
+        if (!$filterable instanceof VisibilityInterface) {
+            return $payload;
+        }
+
+        if ($payload->getApiSpecification()->isVisibilityAllowed($this->toVisibility($filterable->getVisibility()))) {
+            return $payload;
+        }
+
+        return new FilterPayload(null, $payload->getApiSpecification());
+    }
+
+    private function toVisibility(string $visibility) : int
+    {
+        switch ($visibility) {
+            case 'public':
+                return ApiSpecification::VISIBILITY_PUBLIC;
+            case 'protected':
+                return ApiSpecification::VISIBILITY_PROTECTED;
+            case 'private':
+                return ApiSpecification::VISIBILITY_PRIVATE;
+        }
+
+        throw new InvalidArgumentException($visibility . ' is not a valid visibility');
     }
 }
