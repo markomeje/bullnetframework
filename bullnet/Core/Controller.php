@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php 
 
+declare(strict_types=1);
 namespace Bullnet\Core;
 
 
-class Controller {
+class Controller 
+{
 
     /**
      * @var object

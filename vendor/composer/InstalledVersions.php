@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '01ad1d22d384649fa638d2125f40de10b5d544a5',
+    'reference' => '322ac677b447bc2f9c08c4565331e596a8d4cc6b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '01ad1d22d384649fa638d2125f40de10b5d544a5',
+      'reference' => '322ac677b447bc2f9c08c4565331e596a8d4cc6b',
     ),
     'brick/math' => 
     array (
@@ -89,48 +89,12 @@ private static $installed = array (
       ),
       'reference' => '4259ae4154e639557af751ae719d58253a79282a',
     ),
-    'composer/package-versions-deprecated' => 
-    array (
-      'pretty_version' => '1.11.99.2',
-      'version' => '1.11.99.2',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c6522afe5540d5fc46675043d3ed5a45a740b27c',
-    ),
     'container-interop/container-interop' => 
     array (
       'replaced' => 
       array (
         0 => '*',
       ),
-    ),
-    'doctrine/cache' => 
-    array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '331b4d5dbaeab3827976273e9356b3b453c300ce',
-    ),
-    'doctrine/dbal' => 
-    array (
-      'pretty_version' => '2.13.2',
-      'version' => '2.13.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8dd39d2ead4409ce652fd4f02621060f009ea5e4',
-    ),
-    'doctrine/deprecations' => 
-    array (
-      'pretty_version' => 'v0.5.3',
-      'version' => '0.5.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9504165960a1f83cc1480e2be1dd0a0478561314',
     ),
     'doctrine/event-manager' => 
     array (
@@ -158,15 +122,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e864bbf5904cb8f5bb334f99209b48018522f042',
-    ),
-    'doctrine/migrations' => 
-    array (
-      'pretty_version' => '2.3.1',
-      'version' => '2.3.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'af915024d41669600354efe78664ee86dfca62e1',
     ),
     'egulias/email-validator' => 
     array (
@@ -203,6 +158,33 @@ private static $installed = array (
       array (
       ),
       'reference' => '7e279d2cd5d7fbb156ce46daada972355cea27bb',
+    ),
+    'illuminate/collections' => 
+    array (
+      'pretty_version' => 'v8.53.1',
+      'version' => '8.53.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd470b6b804de3db1a8a91b0900ad3cc9cca61ab5',
+    ),
+    'illuminate/contracts' => 
+    array (
+      'pretty_version' => 'v8.53.1',
+      'version' => '8.53.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '504a34286a1b4c5421c43087d6bd4e176138f6fb',
+    ),
+    'illuminate/macroable' => 
+    array (
+      'pretty_version' => 'v8.53.1',
+      'version' => '8.53.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '300aa13c086f25116b5f3cde3ca54ff5c822fb05',
     ),
     'ipfinder/ipfinder' => 
     array (
@@ -360,22 +342,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '6608f01670c3cc5079e18c1dab1104e002579143',
-    ),
-    'ocramius/package-versions' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '1.11.99',
-      ),
-    ),
-    'ocramius/proxy-manager' => 
-    array (
-      'pretty_version' => '2.2.3',
-      'version' => '2.2.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4d154742e31c35137d5374c998e8f86b54db2e2f',
     ),
     'opis/closure' => 
     array (
@@ -746,12 +712,12 @@ private static $installed = array (
     ),
     'ramsey/collection' => 
     array (
-      'pretty_version' => '1.1.4',
-      'version' => '1.1.4.0',
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ab2237657ad99667a5143e32ba2683c8029563d4',
+      'reference' => '4d85fbcd9d2fb1cfd6f81b2f00e687b1c6056b3a',
     ),
     'ramsey/uuid' => 
     array (
@@ -1065,12 +1031,12 @@ private static $installed = array (
     ),
     'symfony/flex' => 
     array (
-      'pretty_version' => 'v1.13.3',
-      'version' => '1.13.3.0',
+      'pretty_version' => 'v1.13.4',
+      'version' => '1.13.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2597d0dda8042c43eed44a9cd07236b897e427d7',
+      'reference' => 'd81196c3f3b544e32997b67e955fb8291fdfe770',
     ),
     'symfony/framework-bundle' => 
     array (

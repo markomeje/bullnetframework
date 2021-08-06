@@ -17,18 +17,20 @@ class Registry
     /**
 	 * Get instance
 	 * @var array
+	 * @return object || null
 	 */
-	public static function get($key) : mixed
+	public static function get($key) : ?object
 	{
 		return self::$instances[$key] ?? null;
 	}
 
     /**
 	 * Creates an instance
-	 * @param string
-	 * @param object
+	 * @param string $key
+	 * @param object $instance
+	 * @return void
 	 */
-	public static function set($key, $instance = null) : void
+	public static function set(string $key, object $instance = null) : void
 	{
 	 	self::$instances[$key] = $instance;
 	}

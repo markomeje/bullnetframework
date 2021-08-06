@@ -1,19 +1,31 @@
 <?php
 
+declare(strict_types=1);
 namespace Bullnet\Core;
 use \Exception;
 
-class View {
+class View 
+{
+
+    /**
+     *@return void
+     */
+    public function __construct()
+    {}
+
     /**
      * For rendering views files
-     * @param  [string] $view [the path to the views folder]
-     * @param  array  $data [the actual data to send to the view]
-     * @return callable
+     * @param string $view
+     * @param array $data
      * @static static method
      */
-	public static function render($view, $data = [], $response){
+	public static function render(string $view, aray $data = [], $response)
+    {
         empty($data) ? [] : extract($data);
-        if (strpos($view, '.') === false) throw new Exception("View Path Must Contain A Period To Separate the Folder Name And File Name Without Spaces");
+        if (strpos($view, '.') === false) {
+            throw new Exception("View Path Must Contain A Period To Separate the Folder Name And File Name Without Spaces");
+        }
+
         $view = explode('.', $view);
         $foldername = isset($view[0]) ? $view[0] : 'home';
         $filename = isset($view[1]) ? $view[1] : 'index';

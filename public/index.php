@@ -1,7 +1,6 @@
 <?php 
 
 declare(strict_types=1);
-use Bullnet\Core\{Logger, Config};
 use Bullnet\Libraries\{Authenticated, Session};
 use Bullnet\Http\Cookie;
 use Bullnet\Models\Login;
@@ -65,7 +64,7 @@ define('DOMAIN',  PROTOCOL.$_ENV['DOMAIN']);
 /**
  * Display all errors during development
  */
-if (Config::get('ENVIROMENT') === 'development') {
+if (config()->get('ENVIROMENT') === 'development') {
 	ini_set('display_errors', '1');
 	ini_set('display_startup_errors', '1');
 	error_reporting(E_ALL);
@@ -81,9 +80,10 @@ Session::start();
  * Remember me cookie setup
  * -----------------------------------------------------------------------
  */
-if((Authenticated::user()->status === false || Authenticated::user()->id === 0) && Cookie::exists(Config::get('REMEMBER_ME_COOKIE_NAME'))) {
+$rememberme = config()->get('REMEMBER_ME_COOKIE_NAME');
+if(auth()->user()->id === 0 && Cookie::exists($rememberme)) {
     Login::remember();
-}  
+} 
 
 /**
  * --------------------------------------------------------------------
@@ -94,7 +94,7 @@ $app = SlimAppFactory::create(new DI\Container());
 
 /**
  * ---------------------------------------------------------------------
- * Adding all middlewares
+ * Adding all middlewarescd
  * ---------------------------------------------------------------------
  */
 $middleware = require BULLNET_PATH . DS . 'middleware.php';

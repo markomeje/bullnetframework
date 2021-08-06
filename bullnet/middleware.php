@@ -16,7 +16,7 @@ return function(App $app)
 	 * Render a nice view in production
 	 */
 	$error = $app->addErrorMiddleware(true, true, true);
-	if (\Bullnet\Core\Config::get('ENVIROMENT') === 'production') {
+	if (config()->get('ENVIROMENT') === 'production') {
 		$handler = $error->getDefaultErrorHandler();
         $handler->registerErrorRenderer('text/html', ErrorRenderer::class);
 	}

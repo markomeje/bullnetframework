@@ -39,7 +39,7 @@ class Query implements QueryInterface
      * Positional placeholder string
      * @var string
      */
-    private static $holder = '?';
+    private $holder = '?';
 
     /**
      * Join query
@@ -71,16 +71,16 @@ class Query implements QueryInterface
      */
     public static function table(string $table) : self
     {
-        return self::self($table);
+        return self::query($table);
     }
 
     /**
      * Query instance
      * @return self
      */
-    public static function self(string $table = '') : self
+    public static function query(string $table = '') : self
     {
-        return (new self($table));
+        return (new Query($table));
     }
 
     /**
@@ -96,7 +96,7 @@ class Query implements QueryInterface
         $columns = implode(', ', $keys);
 
         foreach ($keys as $key){
-            $holders[] = self::$holder;
+            $holders[] = $this->holder;
         }
 
         $placeholders = implode(', ', $holders);
@@ -107,17 +107,16 @@ class Query implements QueryInterface
     
     /**
      * Run database query
-     * @return Database object
+     * @return Database
      */
     public function execute() : Database
     {
-        $query = self::$sql;
-        if (is_array($query)) {
-            $query = implode(' ', $query);
+        if (is_array(self::$sql)) {
+            self::$sql = implode(' ', self::$sql);
         }
 
         $fields = array_merge(self::$fields, self::$conditions);
-        return (new Factory($query, $fields))->create();
+        return (new Factory(self::$sql, $fields))->create();
     }
 
     /**
@@ -130,7 +129,7 @@ class Query implements QueryInterface
         self::$table = $table;
         $template = "UPDATE %s";
         self::$sql[] = sprintf($template, $table);
-        return self::self();
+        return self::query();
     }
     
     /**
@@ -143,7 +142,7 @@ class Query implements QueryInterface
         $template = "SET %s";
         self::$fields = $fields;
         foreach ($fields as $key => $value){
-            $holder = self::$holder;
+            $holder = $this->holder;
             $holders[] = "$key = $holder";
         }
 
@@ -175,7 +174,7 @@ class Query implements QueryInterface
         $build = (new Conditions($condition))->build();
         $template = "WHERE %s %s %s";
         self::$conditions = [$build->column => $build->value];
-        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), self::$holder);
+        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), $this->holder);
         return $this;
     }
 
@@ -188,7 +187,7 @@ class Query implements QueryInterface
         $build = (new Conditions($condition))->build();
         $template = "AND %s %s %s";
         self::$conditions = array_merge(self::$conditions, [$build->column => $build->value]);
-        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), self::$holder);
+        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), $this->holder);
         return $this;
     }
 
@@ -211,7 +210,7 @@ class Query implements QueryInterface
         $build = (new Conditions($condition))->build();
         $template = "OR %s %s %s";
         self::$conditions = array_merge(self::$conditions, [$build->column => $build->value]);
-        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), self::$holder);
+        self::$sql[] = sprintf($template, $build->column, strtoupper($build->operand), $this->holder);
         return $this;
     }
 
@@ -244,7 +243,7 @@ class Query implements QueryInterface
         
         $template = "SELECT %s";
         self::$sql[] = sprintf($template, $fields);
-        return static::self();
+        return self::query();
     }
 
     /**
@@ -256,7 +255,7 @@ class Query implements QueryInterface
     {
         $template = "SELECT DISTINCT %s";
         self::$sql[] = sprintf($template, $column);
-        return static::self();
+        return static::query();
     }
 
     /**
@@ -266,7 +265,7 @@ class Query implements QueryInterface
     public static function delete() : self 
     {
         self::$sql[] = "DELETE";
-        return static::self();
+        return static::query();
     }
 
     /**

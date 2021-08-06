@@ -22,7 +22,7 @@ class Config
      * @param $key string
      * @return string
      */
-    public static function get(string $key) : ?string
+    public function get(string $key) : ?string
     {
         $file = BULLNET_PATH . DS . 'config.php';
         if (!file_exists($file)) exit('Configuration file {$file} doesn\'t exist');

@@ -29,7 +29,7 @@ class Comments extends Model
     {
         try {
             $table = self::$table;
-            return Database::table(self::$table)->insert($fields)->execute();
+            return Query::table(self::$table)->insert($fields)->execute();
         } catch (Exception $exception) {
             Logger::log("SIGNUP QUERY ERROR", $exception->getMessage(), __FILE__, __LINE__);
             return null;
@@ -56,7 +56,6 @@ class Comments extends Model
     public static function unique()
     {
         try {
-            $table = self::$table;
             return Query::distinct('role')->from(self::$table)->orderby('role')->desc()->execute()->fetch()->all;
         } catch (Exception $exception) {
             Logger::log("USERS COLLECT QUERY ERROR", $exception->getMessage(), __FILE__, __LINE__);
@@ -67,7 +66,6 @@ class Comments extends Model
     public static function update()
     {
         try {
-            $table = self::$table;
             return Query::update(self::$table)->set(['updated' => time(), 'password' => $password])->where(['id', '!=', 34])->execute()->count();
         } catch (Exception $exception) {
             Logger::log("USERS COLLECT QUERY ERROR", $exception->getMessage(), __FILE__, __LINE__);
@@ -81,8 +79,7 @@ class Comments extends Model
     public static function join()
     {
         try {
-            $table = self::$table;
-            return Query::all()->from(self::$table)->join('comments')->on(['comments.id' => 'userid.comments'])->where(['email', '!=', ''])->and(['role', '!=', 'admin'])->and(['status', '!=', 'active'])->orderby('id')->asc()->execute();
+            return Query::all()->from(self::$table)->join('comments')->on(['comments.id' => 'userid.comments'])->where(['email', '!=', ''])->and(['role', '!=', 'admin'])->and(['status', '!=', 'active'])->orderby('id')->asc()->execute()->fetch()->one;
         } catch (Exception $exception) {
             Logger::log("USERS COLLECT QUERY ERROR", $exception->getMessage(), __FILE__, __LINE__);
             return null;

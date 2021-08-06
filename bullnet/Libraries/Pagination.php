@@ -1,11 +1,11 @@
 <?php
 
 namespace Bullnet\Libraries;
-use Bullnet\Core\Logger;
 use \Exception;
 
 
-class Pagination {
+class Pagination 
+{
     
     /**
      * Used to track the current page
@@ -30,21 +30,13 @@ class Pagination {
     {
 		$this->currentPage = empty($currentPage) ? 1 : (int)$currentPage;
 		$this->totalCount = empty($totalCount) ? 0 : (int)$totalCount;
-        $this->itemsPerPage = empty($itemsPerPage) ? PAGINATION_DEFAULT_LIMIT : (int)$itemsPerPage;
+        $this->itemsPerPage = empty($itemsPerPage) ? config()->get('PAGINATION_DEFAULT_LIMIT') : (int)$itemsPerPage;
 	}
 
-	public static function paginate($sql, $fields = [], $pageNumber, $itemsPerPage, $extraOffset = 0) 
+	public static function paginate($totalCount = 0, $pageNumber, $itemsPerPage, $extraOffset = 0) : ?object
     {
-        try {
-            $database = Database::connect();
-            $database->query($sql, $fields);
-            $totalCount = ($database->rowCount() > 0) ? $database->rowCount() : 0;
-            $extraOffset = (int)$extraOffset > $totalCount ? 0 : (int)$extraOffset;
-            return new Pagination((int)$pageNumber, ($totalCount - $extraOffset), $itemsPerPage);
-        } catch (Exception $error) {
-            Logger::log('GETTING PAGINATION DATA ERROR', $error->getMessage(), __FILE__, $error->getLine());
-            return false;
-        }
+        $extraOffset = (int)$extraOffset > $totalCount ? 0 : (int)$extraOffset;
+        return new Pagination((int)$pageNumber, ($totalCount - $extraOffset), $itemsPerPage);
     }
 
 	public function getOffset() 
@@ -67,12 +59,12 @@ class Pagination {
         return $this->currentPage + 1;
     }
 
-    public function hasPreviousPage() 
+    public function hasPreviousPage() : bool
     {
         return $this->previousPage() >= 1 ? true : false;
     }
 
-    public function hasNextPage() 
+    public function hasNextPage() : bool
     {
         return $this->totalPages() >= $this->nextPage() ? true : false;
     }

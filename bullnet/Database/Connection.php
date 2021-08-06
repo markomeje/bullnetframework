@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 namespace Bullnet\Database;
-use Bullnet\Core\{Logger, Config};
+use Bullnet\Core\Logger;
 use Bullnet\Interfaces\ConnectionInterface;
 use \Exception;
 use \PDO;
@@ -28,10 +28,10 @@ class Connection implements ConnectionInterface
     public function __construct() 
     {
         try{
-            if(Config::get('ENVIROMENT') === 'development') {
-                $credentials = (object)['dbname' => Config::get('LOCAL_DATABASE_NAME'), 'host' => Config::get('LOCAL_DATABASE_HOST'), 'charset' => Config::get('LOCAL_DATABASE_CHARSET'), 'username' => Config::get('LOCAL_DATABASE_USERNAME'), 'password' => Config::get('LOCAL_DATABASE_PASSWORD')];
-            }elseif(Config::get('ENVIROMENT') === 'production') {
-                $credentials = (object)['dbname' => Config::get('LIVE_DATABASE_NAME'), 'host' => Config::get('LIVE_DATABASE_HOST'), 'charset' => Config::get('LIVE_DATABASE_CHARSET'), 'username' => Config::get('LIVE_DATABASE_USERNAME'), 'password' => Config::get('LIVE_DATABASE_PASSWORD')];
+            if(config()->get('ENVIROMENT') === 'development') {
+                $credentials = (object)['dbname' => config()->get('LOCAL_DATABASE_NAME'), 'host' => config()->get('LOCAL_DATABASE_HOST'), 'charset' => config()->get('LOCAL_DATABASE_CHARSET'), 'username' => config()->get('LOCAL_DATABASE_USERNAME'), 'password' => config()->get('LOCAL_DATABASE_PASSWORD')];
+            }elseif(config()->get('ENVIROMENT') === 'production') {
+                $credentials = (object)['dbname' => config()->get('LIVE_DATABASE_NAME'), 'host' => config()->get('LIVE_DATABASE_HOST'), 'charset' => config()->get('LIVE_DATABASE_CHARSET'), 'username' => config()->get('LIVE_DATABASE_USERNAME'), 'password' => config()->get('LIVE_DATABASE_PASSWORD')];
             }else {
                 exit('Invalid enviroment set. Please set either `production` or `development` as enviroment in .env file.');
             }

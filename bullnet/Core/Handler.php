@@ -12,10 +12,8 @@ use \ErrorException;
   *
   */
 
-class Handler {
-
-
-    public function __construct(){}
+class Handler 
+{
 
     /**
      * Register the error and exception handlers.
@@ -23,7 +21,8 @@ class Handler {
      *
      * @return void
      */
-    public static function register(){
+    public static function register()
+    {
         /**
          * Turn off error reporting cause it's handled.
          */
@@ -38,7 +37,8 @@ class Handler {
       *
       * @return void
       */
-    public static function fatal(){
+    public static function fatal()
+    {
         if (PHP_SAPI === 'cli') { return; }
         $error = error_get_last();
         if (!is_array($error)) { return; }
@@ -55,18 +55,18 @@ class Handler {
      * @return void
      * @throws ErrorException
      */
-    public static function error($error, $message, $file, $line, $vars){
+    public static function error($error, $message, $file, $line, $vars)
+    {
         throw new ErrorException($message, 0, $error, $file, $line);
     }
 
     /**
      * Handle & log exceptions
-     *
-     * @param  Throwable  $e
+     * @param  Throwable  $error
      * @return void
-     * @see http://php.net/manual/en/function.set-exception-handler.php
      */
-    public static function exception($error) {
+    public static function exception($error) 
+    {
         Logger::Log(get_class($error), $error->getMessage(), $error->getFile(), $error->getLine());
     }
 

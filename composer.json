@@ -36,9 +36,8 @@
         "ramsey/uuid": "^4.1",
         "fakerphp/faker": "^1.14",
         "robmorgan/phinx": "^0.12.7",
-        "doctrine/migrations": "^2.0",
-        "swiftmailer/swiftmailer": "^6.0",
-        "symfony/flex": "*"
+        "illuminate/collections": "*",
+        "swiftmailer/swiftmailer": "^6.0"
     },
 
     "autoload": {

@@ -11,7 +11,7 @@ class Logger
      * Logs errors
      * @return void
      */
-    public static function log($subject = "", $message = "", $fileName = "", $lineNumber = "") : void
+    public static function log(string $subject = "", $message = "", $fileName = "", $lineNumber = "") : void
     {
         $error = "*******************************************************************\n";
         $logfile = ROOT . DS . "errors.log";
